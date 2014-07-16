@@ -5,11 +5,13 @@ var bower = require('bower');
 var bowerModules;
 
 function readBowerModules(cb) {
-  bower.commands.list({map: true},{offline: module.exports.offline})
+  result = bower.commands.list({map: true},{offline: module.exports.offline})
     .on('end', function (map) {
       bowerModules = map;
-      cb(null, map);
+      result = cb(null, map);
+      return result;
     });
+  console.log(result);
 }
 
 function bowerRequire(moduleName, options) {
